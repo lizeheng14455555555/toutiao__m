@@ -4,7 +4,7 @@
  */
 
 /**
- * 存储数据
+ * 存储数据0
  */
 export const setItem = (key, value) => {
   // 将数组、对象类型的数据转换为 JSON 格式字符串进行存储
