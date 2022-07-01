@@ -25,7 +25,11 @@
                       true，则作用该类名
                       false，不作用类名
          -->
+
+             
+                                    <!-- 过滤掉不包含的id -->
         <van-icon
+    
           v-show="isEdit && !fiexdChannels.includes(channel.id)"
           slot="icon"
           name="clear"
@@ -93,7 +97,7 @@ export default {
       // 数组的 filter 方法：遍历数组，把符合条件的元素存储到新数组中并返回
       return this.allChannels.filter(channel => {
         // const channels = []
-
+  //全部频道和我的频道对不求出推荐
         // 数组的 find 方法：遍历数组，把符合条件的第1个元素返回
         return !this.myChannels.find(myChannel => {
           return myChannel.id === channel.id
@@ -145,7 +149,9 @@ export default {
           await addUserChannel({
             id: channel.id, // 频道ID
             seq: this.myChannels.length // 序号
+            
           })
+          setItem('USETOUTIAO_CHANNELS', this.myChannels)
         } catch (err) {
           this.$toast('保存失败，请稍后重试')
         }
@@ -168,6 +174,7 @@ export default {
         // 3. 如果删除的激活频道之前的频道，则更新激活的频道项
         // 参数1：要删除的元素的开始索引（包括）
         // 参数2：删除的个数，如果不指定，则从参数1开始一直删除到最后
+        //<=防止删除当前的前面的频道
         if (index <= this.active) {
           // 让激活频道的索引 - 1
           this.$emit('update-active', this.active - 1, true)

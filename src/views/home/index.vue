@@ -1,7 +1,8 @@
 <template>
   <div class="home-container">
-    <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" fixed>
+      
+    
+     <van-nav-bar class="page-nav-bar" fixed>
       <van-button
         class="search-btn"
         slot="title"
@@ -10,9 +11,9 @@
         round
         icon="search"
         to="/search"
-        >搜索</van-button
-      >
+      >搜索</van-button>
     </van-nav-bar>
+      
     <!-- /导航栏 -->
 
     <!-- 频道列表 -->
@@ -32,6 +33,7 @@
         <!-- 文章列表 -->
       </van-tab>
       <div slot="nav-right" class="placeholder"></div>
+      
       <div
         slot="nav-right"
         class="hamburger-btn"
@@ -39,9 +41,50 @@
       >
         <i class="toutiao toutiao-gengduo"></i>
       </div>
+      
     </van-tabs>
     <!-- /频道列表 -->
-
+<!-- 频道编辑弹出层 -->
+    <van-popup
+      v-model="isChennelEditShow"
+      closeable
+      close-icon-position="top-left"
+      position="bottom"
+      :style="{ height: '100%' }"
+    >
+      <channel-edit
+        :my-channels="channels"
+        :active="active"
+        @update-active="onUpdateActive"
+      />
+    </van-popup>
+     <van-popup
+      v-model="isChennelEditShow1"
+      closeable
+      close-icon-position="top-left"
+      position="left"
+      :style="{width:'85%', height: '100%' }"
+    >
+      <channel-edit
+        :my-channels="channels"
+        :active="active"
+        @update-active="onUpdateActive"
+      />
+    </van-popup>
+     <van-popup
+      v-model="isChennelEditShow2"
+      closeable
+      close-icon-position="top-left"
+      position="right"
+      :style="{ width:'85%',height: '100%' }"
+    >
+      <channel-edit
+        :my-channels="channels"
+        :active="active"
+        @update-active="onUpdateActive"
+      />
+    </van-popup>
+    <!-- /频道编辑弹出层 -->
     <!-- 频道编辑弹出层 -->
     <van-popup
       v-model="isChennelEditShow"
@@ -79,6 +122,8 @@ export default {
       active: 0,
       channels: [], // 频道列表
       isChennelEditShow: false, // 控制编辑频道弹出层的显示状态
+      isChennelEditShow1: false, // 控制编辑频道弹出层的显示状态
+      isChennelEditShow2: false, // 控制编辑频道弹出层的显示状态
     };
   },
   computed: {
