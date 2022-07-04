@@ -56,7 +56,6 @@
 		        // 2. 将数据添加到数组列表中
 		        const { results } = data.data
 		        this.list.push(...results)
-
 		        // 3. 将本次加载中的 loading 关闭
 		        this.loading = false
 
@@ -64,13 +63,14 @@
 		        if (results.length) {
 		          // 如果有，则更新获取下一个数据的页码
 		          this.page++
-		        } else {
+		        }  if(this.page>3) {
 		          // 如果没有，则将加载状态 finished 设置为结束
-		          this.finished = true
+                     this.error = true
+		        this.finished = true
 		        }
 		      } catch (err) {
 		        // 展示加载失败的提示状态
-		        this.error = true
+		       
 
 		        // 加载失败了 loading 也要关闭
 		        this.loading = false

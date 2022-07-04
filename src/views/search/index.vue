@@ -7,6 +7,7 @@
 		     -->
 		    <form class="search-form" action="/">
 		      <van-search
+              autofocus
 		        v-model="searchText"
 		        show-action
 		        placeholder="请输入搜索关键词"
@@ -60,6 +61,7 @@
 		  props: {},
 		  data () {
 		    return {
+                //搜索组件 值
 		      searchText: '',
 		      isResultShow: false, // 控制搜索结果的展示
 		      searchHistories: getItem('TOUTIAO_SEARCH_HISTORIES') || [] // 搜索的历史记录数据
@@ -87,8 +89,14 @@
 		      if (index !== -1) {
 		        this.searchHistories.splice(index, 1)
 		      }
-		      this.searchHistories.unshift(val)
+               if(this.searchHistories.length<3){
 
+                  this.searchHistories.unshift(val)
+               } else{
+                 this.searchHistories.splice(this.searchHistories.length-1, 1)
+                this.searchHistories.unshift(val)
+               }
+		   
 		      // 渲染搜索结果
 		      this.isResultShow = true
 		    },

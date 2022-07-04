@@ -54,7 +54,9 @@
 	      } else {
 	        // 非删除状态，直接进入搜索
 	        this.$emit('search', item)
+            
 	      }
+
 	    }
 	  }
 	}
